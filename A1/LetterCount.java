@@ -19,7 +19,7 @@ public class WordCount {
                 String str = tokenizer.nextToken().replaceAll("[^a-zA-z]","").toLowerCase();
                 for (int i = 0; i<str.length(); i++){
                    letter.set(new byte[] {(byte)str.charAt(i)});
-                   output.collect(letter,one)
+                   output.collect(letter,one);
             }
         }
     }
@@ -31,7 +31,7 @@ public class WordCount {
                 sum += values.next().get();
                 result.set(sum);
                 output.collect(key, result);
-}
+            }
         }
     }
 	
