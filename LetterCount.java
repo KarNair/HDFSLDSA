@@ -10,17 +10,17 @@ import org.apache.hadoop.util.*;
 public class WordCount {
     public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
         private final static IntWritable one = new IntWritable(1);
-        private Text word = new Text();
+        private Text letter = new Text();
 	    
         public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
             String line = value.toString();
             StringTokenizer tokenizer = new StringTokenizer(line);
             while (tokenizer.hasMoreTokens()) {
-                String token = tokenizer.nextToken();
-                if (token.startsWith("d")) {
-                output.collect(word, one);
-                }
-            }
+                String str = tokenizer.nextToken().replaceAll("[^a-zA-z]","").toLowerCase();
+                for (int i = 0; i<str.length(); i++){
+                   letter.set(new byte[] {(byte)str.charAt(i)});
+                   output.collect(letter,one)
+}
         }
     }
 	
@@ -29,8 +29,9 @@ public class WordCount {
             int sum = 0;
             while (values.hasNext()) {
                 sum += values.next().get();
-            }
-            output.collect(key, new IntWritable(sum));
+                result.set(sum);
+                output.collect(key, result);
+}
         }
     }
 	
