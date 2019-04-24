@@ -20,10 +20,10 @@ public class WordCount {
                 for (int i = 0; i<str.length(); i++){
                    letter.set(new byte[] {(byte)str.charAt(i)});
                    output.collect(letter,one)
-}
+            }
         }
     }
-	
+}	
     public static class Reduce extends MapReduceBase implements Reducer<Text, IntWritable, Text, IntWritable> {
         public void reduce(Text key, Iterator<IntWritable> values, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
             int sum = 0;
