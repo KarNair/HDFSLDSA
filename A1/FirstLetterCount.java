@@ -7,22 +7,19 @@ import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.util.*;
 
 
-public class WordCount {
+public class FirstLetterCount {
     public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
 
-        public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter)
-                throws IOException {
+        public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
             String line = value.toString();
             StringTokenizer tokenizer = new StringTokenizer(line);
             while (tokenizer.hasMoreTokens()) {
-                // Convert string to upper case in order to make the mapping
-                // function not case-sensitive
+                // To Remove Case Sensitivity
                 String token = tokenizer.nextToken().toUpperCase();
-                // Only look at the first letter
+                // Check First Letter
                 Character letter = token.charAt(0);
-                // Produce the word using the first letter of the string
                 word.set("number_of_" + String.valueOf(letter));
                 output.collect(word, one);
             }
