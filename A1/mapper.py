@@ -3,18 +3,38 @@
 """mapper.py"""
 
 import sys
+import json
+import re
+
+pronoun = ["han","hen","hon","den","det","denna","denne"]
 
 # input comes from STDIN (standard input)
 for line in sys.stdin:
-    # remove leading and trailing whitespace
-    line = line.strip()
-    # split the line into words
-    words = line.split()
-    # increase counters
-    for word in words:
-        # write the results to STDOUT (standard output);
-        # what we output here will be the input for the
-        # Reduce step, i.e. the input for reducer.py
-        #
-        # tab-delimited; the trivial word count is 1
-        print ('%s\t%s' % (word, 1))
+	line = line.strip()
+    tweets = json.loads(line)
+
+    try:
+    	tweets = json.loads(line)
+    	if 'retweeted_status' in tweets:
+    		if retweeted_status!='':
+    			continue
+
+    	print ('Unique_Tweets', 1)
+
+    	text = tweets["text"]
+
+    	#flag = 0
+
+    	for word in pronoun:
+
+    		text_match = re.compile(r"\b%s\b" %(item), re.IGNORECASE)
+    		
+    		if text_match.search(text):
+    			print(word,1)
+    			#flag = 1
+
+    	"""if flag == 1:
+    		print('keywords_unique',1)"""
+    except:
+    	pass
+
