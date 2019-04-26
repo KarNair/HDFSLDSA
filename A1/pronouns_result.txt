@@ -1,0 +1,8 @@
+Unique_Tweets	2341577
+den	1220721
+denna	22471
+denne	3986
+det	456521
+han	666495
+hen	31108
+hon	307534
